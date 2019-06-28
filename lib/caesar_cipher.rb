@@ -1,22 +1,37 @@
 def caesar_cipher(string, shift)
     letters = string.split('')
     letters.map! do |letter|
-        number = letter.ord
-        # number += shift if letter.between?('a','z') || letter.between?('A', 'Z')
+        current_pos = letter.ord
         if (97..122).include? letter.ord
-            return shift_97(shift).chr
+            lowercase_shift(current_pos, shift).chr
         elsif (65..90).include? letter.ord
-            return shift_65(shift).chr
+            uppercase_shift(current_pos,shift).chr
         end
-        # number.chr
     end
     
     return letters.join('')
 end
 
-def shift_97(number)
-    (number % 26) + 97
-end 
-def shift_65(number)
-    (number % 26) + 65
+def uppercase_shift(number, shift)
+    number = (number + shift)
+    if number <= 90
+        number
+    else
+        while number > 90
+            number = (number % 90) + 64
+        end
+    end
+    number
+end
+
+def lowercase_shift(number, shift)
+    number = (number + shift)
+    if number < 122
+        number 
+    else
+        while number > 122
+            number = (number % 122) + 96
+        end
+    end
+    number
 end
