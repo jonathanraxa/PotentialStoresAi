@@ -13,12 +13,6 @@ RSpec.describe "initial tests" do
         end
     end
 
-    describe "#caesar_cipher" do
-        it "shifts a lowercase letter over by a negative number" do
-            expect(caesar_cipher("a",-1)).to eql("z")
-        end
-    end
-
     describe "#caesar_cipher" do 
         it "shifts a capital letter over by 5 spaces" do
             expect(caesar_cipher("A",5)).to eql("F")
@@ -37,9 +31,16 @@ RSpec.describe "initial tests" do
         end
     end
 
-    describe "#caesar_cipher" do
+    #negative shifting tests. 
+    describe "#uppercase_backshift" do
         it "shifts a capitalized word over by a negative number" do 
-            expect(caesar_cipher("Brad",-2)).to eql("Zpyb")
+            expect(uppercase_backshift(65,-2)).to eql(89)
+        end
+    end
+
+    describe "#lowercase_backshift" do
+        it "shifts a lowercase letter over by a negative number" do
+            expect(lowercase_backshift(97,-2)).to eql(121)
         end
     end
 
