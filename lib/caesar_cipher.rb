@@ -37,7 +37,19 @@ def lowercase_shift(number, shift)
 end
 
 def uppercase_backshift(number, shift)
+    temp = (number + shift)
+    if temp > 65
+        temp
+    else
+        uppercase_shift(number, (26 - shift.abs))
+    end
 end
 
 def lowercase_backshift(number, shift)
+    temp = (number + shift)
+    if temp > 97
+        temp
+    else
+        lowercase_shift(number, (26 - shift.abs))
+    end
 end
