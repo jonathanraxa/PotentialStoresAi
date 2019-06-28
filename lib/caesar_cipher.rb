@@ -35,3 +35,9 @@ def lowercase_shift(number, shift)
     end
     number
 end
+
+def uppercase_backshift(number, shift)
+end
+
+def lowercase_backshift(number, shift)
+end
