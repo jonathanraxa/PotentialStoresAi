@@ -49,42 +49,49 @@ RSpec.describe CaesarCipher do
 
 end
 
-# RSpec.describe "Negative shifts" do
+RSpec.describe CaesarCipher do
+    before {@caesars_cipher = CaesarCipher.new("#{input}")}
 
-#     describe CaesarCipher do
-#         it "lowercase: shifts a letter over by a negative number" do
-#             expect(caesar_cipher("c",-2)).to eql("a")
-#         end
-#     end
+    context "input is c" do
+        let(:input) {"c"}
+        it "shifts a lowercase letter over by a negative number" do
+            expect(@caesars_cipher.shift(-2)).to eql("a")
+        end
+    end
 
-#     describe CaesarCipher do
-#         it "lowercase: wraps from z to a" do 
-#             expect(caesar_cipher("a", -1)).to eql("z")
-#         end
-#     end
+    context "input is a" do
+        let(:input) {"a"}
+        it "wraps a lowercase letter from z to a" do 
+            expect(@caesars_cipher.shift(-1)).to eql("z")
+        end
+    end
 
-#     describe CaesarCipher do
-#         it "lowercase: can wrap from z to a over 100 times" do 
-#             expect(caesar_cipher("a", -2601)).to eql("z")
-#         end
-#     end
+    context "input is a" do
+        let(:input) {"a"}
+        it "wraps a lowercase letter from z to a over 100 times" do 
+            expect(@caesars_cipher.shift(-2601)).to eql("z")
+        end
+    end
 
-#     describe CaesarCipher do
-#         it "uppercase: shifts a word over by a negative number" do 
-#             expect(caesar_cipher("C",-2)).to eql("A")
-#         end
-#     end
+    context "input is C" do
+        let(:input) {"C"}
+        it "shifts an uppercase word over by a negative number" do 
+            expect(@caesars_cipher.shift(-2)).to eql("A")
+        end
+    end
 
-#     describe CaesarCipher do
-#         it "uppercase: wraps from z to a" do 
-#             expect(caesar_cipher("A", -1)).to eql("Z")
-#         end
-#     end
+    context "input is A" do
+        let(:input) {"A"}
+        it "wraps an uppercase letter from z to a" do 
+            expect(@caesars_cipher.shift(-1)).to eql("Z")
+        end
+    end
 
-#     describe CaesarCipher do
-#         it "uppercase: can wrap from z to a over 100 times" do 
-#             expect(caesar_cipher("A", -2601)).to eql("Z")
-#         end
-#     end
+    context "input is A" do
+        let(:input) {"A"}
+        it "wraps an uppercase letter from z to a over 100 times" do 
+            expect(@caesars_cipher.shift(-2601)).to eql("Z")
+        end
+    end
 
-# end
+end
