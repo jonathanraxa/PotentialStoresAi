@@ -21,9 +21,9 @@ def uppercase_shift(current_pos, shift)
     end
 end
 
-# def uppercase_backshift(number, shift)
-#     (number + shift) > 65 ? (number + shift) : uppercase_shift(number, (26 - shift.abs))
-# end
+def uppercase_backshift(number, shift)
+    (number + shift) > 65 ? (number + shift) : uppercase_shift(number, (26 - shift.abs))
+end
 
 def lowercase_shift(current_pos, shift)
     new_position = current_pos + (shift % 26)
@@ -34,6 +34,6 @@ def lowercase_shift(current_pos, shift)
     end
 end
 
-# def lowercase_backshift(number, shift)
-#     (number + shift) > 97 ? (number + shift) : lowercase_shift(number, (26 - shift.abs)) 
-# end
+def lowercase_backshift(number, shift)
+    (number + shift) > 97 ? (number + shift) : lowercase_shift(number, (26 - shift.abs)) 
+end
