@@ -6,20 +6,20 @@ class CaesarCipher
 
     def shift(shift)
         @letters.map! do |letter|
-            current_pos = letter.ord
-            if (97..122).include? letter.ord
-                case shift >= 0
+            position_in_alpabet = letter.ord
+            if (97..122).include? letter.ord #if the letter is lower case
+                case shift >= 0 #check if posotive or negative shift
                 when true
-                    lowercase_shift(current_pos, shift).chr
+                    lowercase_shift(position_in_alpabet, shift).chr
                 when false
-                    lowercase_backshift(current_pos, shift).chr
+                    lowercase_backshift(position_in_alpabet, shift).chr
                 end
-            elsif (65..90).include? letter.ord
-                case shift >= 0
+            elsif (65..90).include? letter.ord #if the letter is upper case
+                case shift >= 0 # check if posotive or negative shift
                 when true
-                    uppercase_shift(current_pos,shift).chr
+                    uppercase_shift(position_in_alpabet,shift).chr
                 when false
-                    uppercase_backshift(current_pos, shift).chr
+                    uppercase_backshift(position_in_alpabet, shift).chr
                 end
             end
         end
