@@ -41,31 +41,42 @@ RSpec.describe "posotive shifts" do
 
 end
 
-# RSpec.describe "Negative shifts" do
+RSpec.describe "Negative shifts" do
 
-#     #negative shifting tests.
-#     describe "#lowercase_backshift" do
-#         xit "shifts a lowercase letter over by a negative number" do
-#             expect(lowercase_backshift(97,-2)).to eql(121)
-#         end
-#     end
+    describe "#caesar_cipher" do
+        it "lowercase: shifts a letter over by a negative number" do
+            expect(caesar_cipher("c",-2)).to eql("a")
+        end
+    end
 
-#     describe "#lowercase_backshift" do
-#         xit "shift a lowercase letter over by a large negative number" do 
-#             expect(lowercase_backshift(97, -27)).to eql(122)
-#         end
-#     end
+    describe "#caesar_cipher" do
+        it "lowercase: wraps from z to a" do 
+            expect(caesar_cipher("a", -1)).to eql("z")
+        end
+    end
 
-#     describe "#uppercase_backshift" do
-#         xit "shifts a capitalized word over by a negative number" do 
-#             expect(uppercase_backshift(65,-2)).to eql(89)
-#         end
-#     end
+    describe "#caesar_cipher" do
+        it "lowercase: can wrap from z to a over 100 times" do 
+            expect(caesar_cipher("a", -2601)).to eql("z")
+        end
+    end
 
-#     describe "#uppsercase_backshift" do
-#         xit "shifts an uppercase letter over by a large negative numebr" do 
-#             expect(uppercase_backshift(65, -27)).to eql(90)
-#         end
-#     end
+    describe "#caesar_cipher" do
+        it "uppercase: shifts a word over by a negative number" do 
+            expect(caesar_cipher("C",-2)).to eql("A")
+        end
+    end
 
-# end
+    describe "#caesar_cipher" do
+        it "uppercase: wraps from z to a" do 
+            expect(caesar_cipher("A", -1)).to eql("Z")
+        end
+    end
+
+    describe "#caesar_cipher" do
+        it "uppercase: can wrap from z to a over 100 times" do 
+            expect(caesar_cipher("A", -2601)).to eql("Z")
+        end
+    end
+
+end
