@@ -12,44 +12,28 @@ def caesar_cipher(string, shift)
     return letters.join('')
 end
 
-def uppercase_shift(number, shift)
-    number = (number + shift)
-    if number <= 90
-        number
+def uppercase_shift(current_pos, shift)
+    new_position = current_pos + (shift % 26)
+    if new_position > 90
+        (new_position % 90) + 64
     else
-        while number > 90
-            number = (number % 90) + 64
-        end
-    end
-    number
-end
-
-def lowercase_shift(number, shift)
-    number = (number + shift)
-    if number < 122
-        number 
-    else
-        while number > 122
-            number = (number % 122) + 96
-        end
-    end
-    number
-end
-
-def uppercase_backshift(number, shift)
-    temp = (number + shift)
-    if temp > 65
-        temp
-    else
-        uppercase_shift(number, (26 - shift.abs))
+        new_position
     end
 end
 
-def lowercase_backshift(number, shift)
-    temp = (number + shift)
-    if temp > 97
-        temp
+# def uppercase_backshift(number, shift)
+#     (number + shift) > 65 ? (number + shift) : uppercase_shift(number, (26 - shift.abs))
+# end
+
+def lowercase_shift(current_pos, shift)
+    new_position = current_pos + (shift % 26)
+    if new_position > 122
+        (new_position % 122) + 96
     else
-        lowercase_shift(number, (26 - shift.abs))
+        new_position
     end
 end
+
+# def lowercase_backshift(number, shift)
+#     (number + shift) > 97 ? (number + shift) : lowercase_shift(number, (26 - shift.abs)) 
+# end
