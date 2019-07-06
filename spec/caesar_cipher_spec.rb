@@ -1,48 +1,49 @@
 require "./lib/caesar_cipher.rb"
 
 RSpec.describe CaesarCipher do 
+    # This test uses "let(:caesars_cipher) . . . " to define the CaesarCipher instannce rather than using "before{@caesars_cipher = . . .}"
 
-    before {@caesars_cipher = CaesarCipher.new("#{input}")}
+    let(:caesars_cipher) { CaesarCipher.new("#{input}") }
     
     context "input is abcd" do 
         let(:input) {"abcd"}
         it "shifts a lowercase word properly" do
-            expect(@caesars_cipher.shift(4)).to eql("efgh")
+            expect(caesars_cipher.shift(4)).to eql("efgh")
         end
     end
 
     context "input is yz" do
         let(:input) {"yz"}
         it "wraps a lowercase word from z to a" do
-            expect(@caesars_cipher.shift(2)).to eql("ab")
+            expect(caesars_cipher.shift(2)).to eql("ab")
         end
     end
 
     context "input is z" do 
         let(:input) {"z"}
         it "wraps a lowercase letter from z to a 601 times" do
-            expect(@caesars_cipher.shift(15601)).to eql("a")
+            expect(caesars_cipher.shift(15601)).to eql("a")
         end
     end
 
     context "input is ABCD" do 
         let(:input) {"ABCD"}
         it "shifts an uppercase word properly" do
-            expect(@caesars_cipher.shift(4)).to eql("EFGH")
+            expect(caesars_cipher.shift(4)).to eql("EFGH")
         end
     end
 
     context "input is YZ" do
         let(:input) {"YZ"}
         it "wraps an uppercase word from z to a" do
-            expect(@caesars_cipher.shift(2)).to eql("AB")
+            expect(caesars_cipher.shift(2)).to eql("AB")
         end
     end
 
     context "input is Z" do 
         let(:input) {"Z"}
         it "wraps an uppercase letter from z to a 601 times" do 
-            expect(@caesars_cipher.shift(15601)).to eql("A")
+            expect(caesars_cipher.shift(15601)).to eql("A")
         end
     end
 
@@ -50,6 +51,7 @@ RSpec.describe CaesarCipher do
 end
 
 RSpec.describe CaesarCipher do
+    # This test uses "before{@caesars_cipher = . . .}" instead of using "let(:caesars_cipher) . . ."
     before {@caesars_cipher = CaesarCipher.new("#{input}")}
 
     context "input is c" do
