@@ -1,7 +1,8 @@
 require "./lib/caesar_cipher.rb"
 
 RSpec.describe CaesarCipher do 
-    # This test uses "let(:caesars_cipher) . . . " to define the CaesarCipher instannce rather than using "before{@caesars_cipher = . . .}"
+    # This test uses "let(:caesars_cipher) . . . " to define the CaesarCipher 
+    #  instannce instead using "before{@caesars_cipher = . . .}"
 
     let(:caesars_cipher) { CaesarCipher.new("#{input}") }
     
@@ -51,7 +52,8 @@ RSpec.describe CaesarCipher do
 end
 
 RSpec.describe CaesarCipher do
-    # This test uses "before{@caesars_cipher = . . .}" instead of using "let(:caesars_cipher) . . ."
+    # This test uses "before{@caesars_cipher = . . .}" 
+    # instead of using "let(:caesars_cipher) . . ."
     before {@caesars_cipher = CaesarCipher.new("#{input}")}
 
     context "input is c" do
