@@ -26,6 +26,7 @@ class CaesarCipher
         @letters.join('')
     end
     
+    private
     def uppercase_shift(current_pos, shift_factor)
         new_position = current_pos + (shift_factor % 26)
         if new_position > 90
