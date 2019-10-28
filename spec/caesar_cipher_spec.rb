@@ -1,4 +1,4 @@
-require "./lib/caesar_cipher.rb"
+require "./lib/cipher/cipher.rb"
 
 RSpec.describe CaesarCipher do 
     # This test uses "let(:caesars_cipher) . . . " to define the CaesarCipher 

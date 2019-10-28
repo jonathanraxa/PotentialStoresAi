@@ -1,4 +1,4 @@
-class CaesarCipher
+class Cipher
 
     def initialize(word)
         @letters = word.split("")
@@ -7,7 +7,9 @@ class CaesarCipher
     def shift(shift_factor)
         @letters.map! do |letter|
             position_in_alpabet = letter.ord
-            if (97..122).include? letter.ord #if the letter is lower case
+            if letter.ord == 32
+                32.chr
+            elsif (97..122).include? letter.ord #if the letter is lower case
                 case shift_factor >= 0 #check if posotive or negative shift
                 when true
                     lowercase_shift(position_in_alpabet, shift_factor).chr

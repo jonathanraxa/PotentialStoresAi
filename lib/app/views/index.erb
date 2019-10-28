@@ -1,0 +1,13 @@
+<h1>Welcome to Caesars Cipher</h1>
+<p>Type some words below</p>
+<form action='/shift' method="GET">
+    <input type='text' name='text' placeholder="Enter some text" value='<%= session[:data][:name] %>'>
+    <input tytpe='text' name='factor' placeholder="Enter a number" value='<%= session[:data][:shift] %>'>
+    <input type='submit' value="Go">
+</form>
+
+<% if session[:data] %>
+    <h2>
+        <%= session[:data][:shifted] %>
+    </h2>
+<% end %>
