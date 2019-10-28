@@ -5,16 +5,15 @@ class CipherApp < Sinatra::Base
         register Sinatra::Reloader 
     end
     set :root, 'lib/app'
-    enable :sessions
     
     get '/' do 
-        session[:data] ||= {}
-        erb :index, locals: {results: session} 
+        erb :index, locals: {text: nil, shift_f: nil, ciphered: nil}
     end
 
     get '/shift' do 
-        cipher = Cipher.new(params['text']).shift(params['factor'].to_i)
-        session[:data] = {name: params[:text], shift: params[:factor], shifted: cipher}
-        redirect '/'
+        @text = params['text']
+        @shift_f = params['factor']
+        ciphered = Cipher.new(@text).shift(@shift_f.to_i)
+        erb :index, locals: {text: @text, shift_f: @shift_f, ciphered: ciphered}
     end
 end
