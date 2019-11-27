@@ -1,0 +1,25 @@
+*,
+*::after,
+*::before {
+    margin: 0; 
+    padding: 0; 
+}
+
+*:focus{ outline: none; }
+
+html{
+    margin: 0; 
+    padding: 0; 
+}
+
+.state {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.state__display {
+
+}
+

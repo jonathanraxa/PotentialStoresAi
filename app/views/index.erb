@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">        
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,400i|Nunito:300,300i" rel="stylesheet">
+
+        <link rel="stylesheet" href="../stylesheet/css/base.css">
+        <link rel="stylesheet" href="../stylesheet/css/components.css">
+        <link rel="stylesheet" href="../stylesheet/css/utilities.css">
+        
+        <title>State Store Locator</title>
+    </head>
+    <body>
+        <div class="state">
+
+            <form class="state__form" action='/state/stats' method="GET">
+                <input class="state__form-input" type='text' name='store_req_pop' placeholder="Enter a population" value='<%= store_req_pop %>'>
+                <input class="state__form-input app-sp-top-sm" tytpe='text' name='state_name' placeholder="Enter a state" value='<%= state_name %>'>
+                <input class="btn btn--go app-sp-top-sm" type='submit' value="Go">
+                <input class="btn btn--clear app-sp-top-sm" type='submit' formaction='/' value='Clear'>
+            </form>
+
+            <div class="state__display">
+                <div>
+                    <b>State Name</b>:  <%= state_name %>
+                </div>
+                <div>
+                    <b>Population Required</b>: <%= store_req_pop %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
