@@ -7,12 +7,12 @@ class PopulationCalc
   include HTTParty
   base_uri 'https://odn.data.socrata.com/'
 
- 
   def initialize(state_name = 'wyoming', population_requirement = 10000)
     @state_name = state_name
     @population_requirement = (population_requirement).to_i
   end
 
+  # updates api retrieval to json_data instance variable
   def set_json_data(state_name)
     @json_data = set_json(state_name)
   end

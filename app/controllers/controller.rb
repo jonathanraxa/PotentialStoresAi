@@ -13,7 +13,6 @@ class ApplicationController < Sinatra::Base
   # development only
   configure :development do
     register Sinatra::Reloader 
-    also_reload '../stylesheet/css/components.css'
     after_reload do
       puts 'reloaded'
     end
