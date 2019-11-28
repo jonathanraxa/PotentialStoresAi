@@ -1,39 +1,104 @@
 # application_controller.rb
+
+require "sinatra/base"
+require "sinatra/reloader"
+
 class ApplicationController < Sinatra::Base
+  
   configure do
     set :views, "app/views"
     set :public_dir, "public"
-    register Sinatra::Reloader 
-
   end
 
-# example: localhost:3000/state/stats?store_req_pop=10000&state_name=wyoming
-
-    set :root, 'controller'
-
-    get '/' do 
-        erb :index, locals: {store_req_pop: nil, state_name: nil, ciphered: nil}
+  # development only
+  configure :development do
+    register Sinatra::Reloader 
+    also_reload '../stylesheet/css/components.css'
+    after_reload do
+      puts 'reloaded'
     end
+  end
+  
+  set :root, 'controller'
+
+  get '/' do 
+    erb :index, locals: {
+      store_req_pop: nil, 
+      state_name: nil, 
+      potential_stores: nil,
+      state_average: nil,
+      all_avg_and_yr: nil
+    }
+  end
+  
+  get '/state/' do 
+    erb :index, locals: {
+      store_req_pop: nil, 
+      state_name: nil, 
+      potential_stores: nil,
+      state_average: nil,
+      all_avg_and_yr: nil
+    }
+  end
+
+  # pulls the params form URL
+  get '/state/stats' do 
+    @store_req_pop = params['store_req_pop']
+    @state_name    = params['state_name']
     
-    get '/state/' do 
-        erb :index, locals: {store_req_pop: nil, state_name: nil, ciphered: nil}
-    end
+    potential_stores = PopulationCalc.new(@state_name, @store_req_pop)
 
-    # pulls the params form URL
-    get '/state/stats' do 
-      @store_req_pop = params['store_req_pop']
-      @state_name    = params['state_name']
-      data = PopulationCalc.new(@state_name, @store_req_pop)
-      data.get_store_support_count
-      erb :index, locals: {store_req_pop: @store_req_pop, state_name: @state_name}
-    end
+    if (potential_stores.set_json_data(@state_name) != nil && @store_req_pop != nil)
+      
+      erb :index, locals: {
+        store_req_pop: @store_req_pop, 
+        state_name: @state_name.capitalize(), 
+        potential_stores: potential_stores.get_state_support_count,
+        state_average: potential_stores.get_avg_population,
+        all_avg_and_yr: potential_stores.get_year_and_avg,
+        invalid_form_value: ""
+      }
 
-    # sets new params
-    post '/state/stats/:store_req_pop/:state_name' do
-      @store_req_pop = params['store_req_pop']
-      @state_name    = params['state_name']
-      data = PopulationCalc.new(@state_name, @store_req_pop)
-      data.get_store_support_count
-      erb :index, locals: {store_req_pop: @store_req_pop, state_name: @state_name}
+    else 
+      erb :index, locals: {
+        store_req_pop: nil, 
+        state_name: nil, 
+        potential_stores: nil,
+        state_average: nil,
+        all_avg_and_yr: nil,
+        invalid_form_value: "invalid form value : please re-enter"
+      }
+
     end
-end
+  end 
+
+
+
+  # sets new params
+  post '/state/stats/:store_req_pop/:state_name' do
+    @store_req_pop = params['store_req_pop']
+    @state_name    = params['state_name']
+  
+    potential_stores = PopulationCalc.new(@state_name, @store_req_pop)
+  
+    if (potential_stores.set_json_data(@state_name) != nil && @store_req_pop != nil)
+      erb :index, locals: {
+        store_req_pop: @store_req_pop, 
+        state_name: @state_name.capitalize(), 
+        potential_stores: potential_stores.get_state_support_count,
+        state_average: potential_stores.get_avg_population,
+        all_avg_and_yr: potential_stores.get_year_and_avg,
+        invalid_form_value: ""
+      }
+    else 
+      erb :index, locals: {
+        store_req_pop: nil, 
+        state_name: nil, 
+        potential_stores: nil,
+        state_average: nil,
+        all_avg_and_yr: nil,
+        invalid_form_value: "invalid form value : please re-enter"
+      }
+    end
+  end
+end # end ApplicationController

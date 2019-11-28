@@ -7,29 +7,62 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">        
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,400i|Nunito:300,300i" rel="stylesheet">
 
-        <link rel="stylesheet" href="../stylesheet/css/base.css">
-        <link rel="stylesheet" href="../stylesheet/css/components.css">
-        <link rel="stylesheet" href="../stylesheet/css/utilities.css">
+        <link rel="stylesheet" type="text/css" href="<%= url("../stylesheet/css/base.css")%>">
+        <link rel="stylesheet" type="text/css" href="<%= url("../stylesheet/css/components.css")%>">
+        <link rel="stylesheet" type="text/css" href="<%= url("../stylesheet/css/utilities.css")%>">
+
         
-        <title>State Store Locator</title>
+        <title>State Store Potential</title>
     </head>
+
     <body>
-        <div class="state">
+        <div class="container">
+            <div class="state">
+                <form class="form__group" action='/state/stats' method="GET">
+                    <input class="form__input app-sp-top-md" type='number' name='store_req_pop' placeholder="population requirement" value='<%= store_req_pop %>'>
+                    <input class="form__input app-sp-top-md" type='text' name='state_name' placeholder="state name" value='<%= state_name %>'>                     
+                    <input class="btn btn--clear app-sp-top-lg" type='submit' formaction='/' value='Clear'>
+                    <input class="btn btn--go app-sp-top-lg" type='submit' value="Go">                    
+                    <% if invalid_form_value %> 
+                        <div class="invalid-text app-sp-top-md"><i><%= invalid_form_value %></i></div>  
+                    <% end %>
 
-            <form class="state__form" action='/state/stats' method="GET">
-                <input class="state__form-input" type='text' name='store_req_pop' placeholder="Enter a population" value='<%= store_req_pop %>'>
-                <input class="state__form-input app-sp-top-sm" tytpe='text' name='state_name' placeholder="Enter a state" value='<%= state_name %>'>
-                <input class="btn btn--go app-sp-top-sm" type='submit' value="Go">
-                <input class="btn btn--clear app-sp-top-sm" type='submit' formaction='/' value='Clear'>
-            </form>
+                </form>
 
-            <div class="state__display">
-                <div>
-                    <b>State Name</b>:  <%= state_name %>
+                <div class="state__display">
+                    
+                    <div>
+                        <b>State Name</b>:  <% if state_name %> <%= state_name %>  <% end %>
+                    </div>
+
+                    <div class="app-sp-top-lg">        
+                        <b>Population Count</b>
+                        <ul class="state__year-avg">
+                            <% if state_average %>
+                                <% all_avg_and_yr.each do |key, value| %>                                
+                                    <li><b><%= "#{key}" %></b><%= " -- #{value.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse} people" %></li>            
+                                <% end %>   
+                            <% end %>  
+                        </ul>
+                    </div>
+
+                    <div class="app-sp-top-lg">
+                        <b>Population Average</b>: 
+                        <% if state_average %> 
+                            <%= state_average.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse %>  
+                        <% end %>
+                    </div>
+
+                    <div class="app-sp-top-lg">
+                        <b>Population Required for Store</b>: <% if store_req_pop %> <%= store_req_pop.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse %>  <% end %>
+                    </div>
+                
+                    <div class="app-sp-top-lg">
+                        <b>Potential # of Stores in State</b>:  <% if potential_stores %> <%= potential_stores.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse %>  <% end %>
+                    </div>
+                
                 </div>
-                <div>
-                    <b>Population Required</b>: <%= store_req_pop %>
-                </div>
+
             </div>
         </div>
     </body>

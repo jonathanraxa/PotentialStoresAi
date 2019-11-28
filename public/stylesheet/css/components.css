@@ -1,35 +1,98 @@
 /* FORM */
-.state__form-input {
-    font-size: 1rem;
+.form__group{
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+}
+.form__input {
+    font-size: 1.5rem;
     font-family: inherit;
     color: inherit;
-    padding: 1rem 1rem;
-    border-radius: 6rem;
-    background-color: #fff;
-    border: 2px solid #000;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.55);
+    border: none;
+    border-bottom: 3px solid transparent;
     width: 90%;
     display: block;
+    transition: all .3s;
+    grid-column: 1 / -1;
+}   
+
+.form__input:focus {
+    outline: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #55c57a; 
 }
+
+.form__input:focus:invalid {
+    border-bottom: 3px solid #ff7730; 
+}
+
+.form__input::-webkit-input-placeholder {
+    color: #999999; 
+}
+
+.form__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    display: block;
+    transition: all .3s; 
+}
+
+.form__input:placeholder-shown + .form__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem); 
+}
+
 
 /* BUTTON */
 .btn {   
     text-transform: uppercase;
     text-decoration: none;
-    padding: 0.5rem 2rem;
-    display: block;
-    border-radius: 6rem;
+    padding: 1.5rem 1rem;
+    border-radius: 3rem;
     transition: all .2s;
     position: relative;
     font-size: 1rem;
     border: none;
     cursor: pointer;
-    color: white;
+    color: #fff;
+    font-weight: 500;
+    display: block;
+    width: 70%;
+    justify-self: center;
 }
-
+.btn:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0; 
+}
+.btn:active, .btn:focus {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); 
+}
 .btn--go {
-    background-color: green;
+    background-color: #36a059;
+    grid-template-columns: min-content;
 }
 
 .btn--clear {
-    background-color: red;
+    background-color: #ec4141;
+}
+
+/* ERROR TEXT */
+.invalid-text {
+    grid-template-rows: 1fr;
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #ec4141;
+    font-size: 1.5rem;
 }
