@@ -23,21 +23,23 @@ class ApplicationController < Sinatra::Base
 
   get '/' do 
     erb :index, locals: {
-      store_req_pop: nil, 
-      state_name: nil, 
-      potential_stores: nil,
-      state_average: nil,
-      all_avg_and_yr: nil
+        store_req_pop: nil, 
+        state_name: nil, 
+        potential_stores: nil,
+        state_average: nil,
+        all_avg_and_yr: nil,
+        invalid_form_value: nil
     }
   end
   
   get '/state/' do 
     erb :index, locals: {
-      store_req_pop: nil, 
-      state_name: nil, 
-      potential_stores: nil,
-      state_average: nil,
-      all_avg_and_yr: nil
+        store_req_pop: nil, 
+        state_name: nil, 
+        potential_stores: nil,
+        state_average: nil,
+        all_avg_and_yr: nil,
+        invalid_form_value: nil
     }
   end
 
